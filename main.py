@@ -2,8 +2,8 @@ import pygame
 import numpy as np
 
 WINDOW_SIZE = (1000,1000)
-GRID = (10,10)
-SQUARE_SIZE = min(WINDOW_SIZE[0]//(GRID[0]+1)-5,WINDOW_SIZE[1]//(GRID[1]+1)-5)
+GRID = (8,8)
+SQUARE_SIZE = min(WINDOW_SIZE[0]//(GRID[0]+1)-10,WINDOW_SIZE[1]//(GRID[1]+1)-10)
 
 select_card = False
 card_image = None
@@ -15,10 +15,12 @@ class SpriteObject(pygame.sprite.Sprite):
         # init as pygame.sprite.Sprite
         super().__init__()
 
-        self.original_image = pygame.Surface((SQUARE_SIZE, SQUARE_SIZE), pygame.SRCALPHA)
-        pygame.draw.rect(self.original_image, color, pygame.Rect(0, 0, SQUARE_SIZE, SQUARE_SIZE))
+        self.image = pygame.image.load('./imgs/pic00.png').convert_alpha()
+        self.image = pygame.transform.scale(self.image, (SQUARE_SIZE, SQUARE_SIZE))
+        #self.original_image = pygame.Surface((SQUARE_SIZE, SQUARE_SIZE), pygame.SRCALPHA)
+        #pygame.draw.rect(self.original_image, color, pygame.Rect(0, 0, SQUARE_SIZE, SQUARE_SIZE))
 
-        self.image = self.original_image
+        #self.image = self.original_image
         self.rect = self.image.get_rect(center = (x, y))
         self.clicked = False
 
@@ -85,7 +87,7 @@ pic_n = 1
 for px in range(4):
     for py in range(4):
         img_path = f'./imgs/pic{pic_n:02d}.png'
-        tiles2 += [SpriteObject3(dx*(px+5), dy*(py+5), img_path)]
+        tiles2 += [SpriteObject3(dx*(px+3), dy*(py+3), img_path)]
         pic_n += 1
 
 #tiles = [
